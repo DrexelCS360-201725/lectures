@@ -4,43 +4,43 @@
 ;; Add one to a number
 ;;
 (define (inc x)
-  'not-implemented)
+  (+ 1 x))
 
 ;;
 ;; Church-encoding of zero
 ;;
 (define (zero f x)
-  'not-implemented)
+  x)
 
 ;;
 ;; Church-encoding of successor
 ;;
-(define succ
-  'not-implemented)
+(define (succ n)
+  (lambda (f x) (f (n f x))))
 
 ;;
 ;; Define one in terms of zero and succ
 ;;
 (define one
-  'not-implemented)
+  (succ zero))
 
 ;;
 ;; Define addition
 ;;
 (define (add n m)
-  'not-implemented)
+  (lambda (f x) (n f (m f x))))
 
 ;;
 ;; A few more numbers...
 ;;
 
-(define two 'not-implemented)
-(define three 'not-implemented)
-(define four 'not-implemented)
-(define five 'not-implemented)
+(define two (succ one))
+(define three (succ two))
+(define four (succ three))
+(define five (succ four))
 
 ;;
 ;; Define multiplication
 ;;
 (define (mult n m)
-  'not-implemented)
+  (lambda f x (n (lambda (x) (m f x)) x)))
